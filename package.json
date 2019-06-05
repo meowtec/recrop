@@ -1,0 +1,62 @@
+{
+  "name": "recrop",
+  "version": "",
+  "description": "a customizable image-crop / region-selection component for React",
+  "keywords": [
+    "react",
+    "cropper"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel -d site demo/index.html",
+    "lint": "eslint --ext .js,.ts,.tsx src demo test",
+    "build": "tsc && parcel build -d site demo/index.html ",
+    "prepare": "npm run build",
+    "test": "karma start",
+    "test:server": "karma start --single-run=false",
+    "test:run": "karma run"
+  },
+  "author": "meowtec<bertonzh@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@types/karma": "^3.0.3",
+    "@types/lodash": "^4.14.133",
+    "@types/mocha": "^5.2.7",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/webpack": "^4.4.32",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.5",
+    "karma-espower-preprocessor": "^1.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-typescript": "^4.1.0",
+    "karma-webpack": "^3.0.5",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "lodash": "^4.17.11",
+    "mocha": "^6.1.4",
+    "parcel": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.4.5",
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  },
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ]
+}
