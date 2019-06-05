@@ -10,7 +10,7 @@
   "scripts": {
     "start": "parcel -d docs demo/index.html",
     "lint": "eslint --ext .js,.ts,.tsx src demo test",
-    "build": "rimraf lib docs && tsc && parcel build -d docs demo/index.html",
+    "build": "rimraf lib docs && tsc && parcel build --public-url '.' -d docs demo/index.html",
     "prepare": "npm run build",
     "test": "karma start",
     "test:server": "karma start --single-run=false",
