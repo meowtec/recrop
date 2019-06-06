@@ -99,14 +99,23 @@
 
 .re-crop__close {
   position: absolute;
-  background: #fff;
+  background: none;
   pointer-events: auto;
-  top: -20px;
-  right: -20px;
-  width: 18px;
-  height: 18px;
-  line-height: 18px;
+  top: -18px;
+  right: -18px;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 16px;
   text-align: center;
+  color: #000;
+  text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 2px #fff;
+  cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    color: #f00;
+  }
 }
 
 .re-crop--no-pointer {

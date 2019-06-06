@@ -4,15 +4,22 @@ import { Omit, Rect } from './utils'
 
 export type MultipleSelectionProps = Omit<SelectionProps, 'crop' | 'hasMask' | 'onChange'> & {
   crops: Rect[],
-  onChange(crops: Rect[]): void,
+  maxCount?: number | null,
+  onChange(crops: Rect[], crop: Rect): void,
 }
 
 export interface MultipleSelectionState {
   borning: boolean,
 }
 
+const defaultProps = {
+  ...Selection.defaultProps,
+}
+
+delete defaultProps.hasMask
+
 export default class MultipleSelection extends PureComponent<MultipleSelectionProps, MultipleSelectionState> {
-  public static defaultProps = Selection.defaultProps
+  public static defaultProps = defaultProps
 
   state: MultipleSelectionState = {
     borning: false,
@@ -47,7 +54,7 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
       }
     }
 
-    onChange(newCrops)
+    onChange(newCrops, crop)
   }
 
   handleChangeFinish = () => {
@@ -56,18 +63,26 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
     })
   }
 
-  selectionAddon = (
-    <div className="re-crop__close">×</div>
-  )
+  handleDel = (index: number) => {
+    const { crops, onChange, onChangeFinish } = this.props
+
+    onChange([
+      ...crops.slice(0, index),
+      ...crops.slice(index + 1),
+    ], crops[index])
+
+    onChangeFinish && onChangeFinish()
+  }
 
   render() {
     const { borning } = this.state
-    const { onChange, crops, className, ...rest } = this.props
+    const { disabled, maxCount, onChange, crops, className, ...rest } = this.props
 
     return (
       <div className={`re-crop__multiple ${className || ''}`}>
         <Selection
           crop={borning ? crops[crops.length - 1] : null}
+          disabled={disabled || !!(maxCount && !borning && crops.length >= maxCount)}
           hasMask={false}
           onChange={crop => this.handleChange(crop, -1)}
           onChangeFinish={this.handleChangeFinish}
@@ -77,11 +92,13 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
           crops.slice(0, crops.length - (borning ?  1 : 0)).map((crop, i) => {
             return (
               <Selection
+                key={i}
                 className="re-crop--no-pointer"
                 crop={crop}
+                disabled={disabled}
                 hasMask={false}
                 onChange={newCrop => this.handleChange(newCrop, i)}
-                selectionAddon={this.selectionAddon}
+                selectionAddon={<div className="re-crop__close" onClick={() => this.handleDel(i)}>×</div>}
                 {...rest}
               />
             )
