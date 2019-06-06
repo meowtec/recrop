@@ -1,6 +1,6 @@
 {
   "name": "recrop",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a customizable image-crop / region-selection component for React",
   "keywords": [
     "react",
