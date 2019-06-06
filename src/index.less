@@ -89,12 +89,20 @@
 }
 
 // MultipleSelection
-.re-crop__multiple .re-crop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.re-crop__multiple {
+  .re-crop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .re-crop__selection:hover {
+    .re-crop__close {
+      color: #f00;
+    }
+  }
 }
 
 .re-crop__close {
@@ -109,12 +117,11 @@
   line-height: 16px;
   text-align: center;
   color: #000;
-  text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 2px #fff;
   cursor: pointer;
   transition: .4s;
 
   &:hover {
-    color: #f00;
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 2px #fff;
   }
 }
 
