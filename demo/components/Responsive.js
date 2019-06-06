@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Rect, ImageCrop } from '../../src'
+import { Rect, ImageCrop, SelectionProps } from '../../src'
 import imageUrl from '../images/sergio-souza-1386770-unsplash.jpg'
 
 export default class Responsive extends PureComponent {
@@ -27,6 +27,24 @@ export default class Responsive extends PureComponent {
     }
   }
 
+  /**
+   * @param {SelectionProps} props
+   * @param {{cropping: boolean}} state
+   */
+  renderSelectionAddon = (props, state) => {
+    return props.crop && (
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: `translate(-50%, -50%)`,
+        fontSize: 12,
+      }}>
+        {Math.round(props.crop.width)} x {Math.round(props.crop.height)}
+      </div>
+    )
+  }
+
   render() {
     return (
       // with fixed height but scaleable
@@ -36,6 +54,7 @@ export default class Responsive extends PureComponent {
           src={imageUrl}
           onChange={this.handleCropChange}
           resizeObserve={this.resizeObserve}
+          selectionAddon={this.renderSelectionAddon}
         />
       </div>
     )

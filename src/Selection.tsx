@@ -69,13 +69,13 @@ export interface SelectionProps {
   margin: number,
   selectionAddon?:
   | React.ReactNode
-  | ((props: SelectionProps, state: SelectionState) => React.ReactNode),
+  | ((crop: Rect) => React.ReactNode),
   onChange(crop: Rect): void,
   onChangeFinish?(): void,
 }
 
 export interface SelectionState {
-  dragging: DragOrd | null,
+  resizingOrd: DragOrd | null,
 }
 
 export default class Selection extends Component<SelectionProps> {
@@ -88,7 +88,7 @@ export default class Selection extends Component<SelectionProps> {
   }
 
   state: SelectionState = {
-    dragging: null,
+    resizingOrd: null,
   }
 
   refCrop = React.createRef<HTMLDivElement>()
@@ -157,12 +157,14 @@ export default class Selection extends Component<SelectionProps> {
   handleChangeFinish = () => {
     const { onChangeFinish } = this.props
     this.setState({
-      dragging: null,
+      cropping: null,
     })
     onChangeFinish && onChangeFinish()
   }
 
   handleCornerMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.button !== 0) return
+
     const {
       crop,
       width,
@@ -178,7 +180,7 @@ export default class Selection extends Component<SelectionProps> {
     const dirs = ord.split('') as BaseOrd[]
 
     this.setState({
-      dragging: ord,
+      cropping: ord,
     })
 
     e.preventDefault()
@@ -216,6 +218,8 @@ export default class Selection extends Component<SelectionProps> {
   }
 
   handleBlankMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.button !== 0) return
+
     const {
       onChange,
       crop,
@@ -249,6 +253,8 @@ export default class Selection extends Component<SelectionProps> {
   }
 
   handleCrossMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.button !== 0) return
+
     e.preventDefault()
     e.stopPropagation()
 
@@ -289,10 +295,14 @@ export default class Selection extends Component<SelectionProps> {
       width,
       height,
       transparent,
-      selectionAddon,
     } = this.props
+    let { selectionAddon } = this.props
 
     if (!crop) return null
+
+    if (typeof selectionAddon === 'function') {
+      selectionAddon = selectionAddon(crop)
+    }
 
     return (
       <div
@@ -372,12 +382,12 @@ export default class Selection extends Component<SelectionProps> {
       className,
       style,
     } = this.props
-    const { dragging } = this.state
+    const { resizingOrd: cropping } = this.state
     const noResizing = locked || disabled
 
     const cropStyle: React.CSSProperties = { ...style }
-    if (!noResizing && dragging) {
-      cropStyle.cursor = getCursor(dragging) + '-resize'
+    if (!noResizing && cropping) {
+      cropStyle.cursor = getCursor(cropping) + '-resize'
     }
 
     return (

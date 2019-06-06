@@ -16,7 +16,7 @@ function App() {
         <ImageCropApp />
         <h3 className="section-title">Crop video</h3>
         <VideoCropApp />
-        <h3 className="section-title">Responsive (observed using <code>window.resize</code>)</h3>
+        <h3 className="section-title">Responsive (observed using <code>window.resize</code>) + selectionAddon</h3>
         <Responsive />
         <h3 className="section-title">Multiple selection</h3>
         <MultipleSelectionApp />

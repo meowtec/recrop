@@ -8,7 +8,7 @@ export type MultipleSelectionProps = Omit<SelectionProps, 'crop' | 'hasMask' | '
   onChange(crops: Rect[], crop: Rect): void,
   selectionAddon?:
   | React.ReactNode
-  | ((props: SelectionProps, state: SelectionState, index: number) => React.ReactNode),
+  | ((crop: Rect, index: number) => React.ReactNode),
 }
 
 export interface MultipleSelectionState {
@@ -77,10 +77,10 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
     onChangeFinish && onChangeFinish()
   }
 
-  renderSelectionAddon = (props: SelectionProps, state: SelectionState, index: number) => {
+  renderSelectionAddon = (crop: Rect, index: number) => {
     const { selectionAddon } = this.props
     if (typeof selectionAddon === 'function') {
-      return selectionAddon(props, state, index)
+      return selectionAddon(crop, index)
     }
 
     return selectionAddon || null
@@ -117,8 +117,8 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
                 crop={crop}
                 disabled={disabled}
                 hasMask={false}
-                onChange={newCrop => this.handleChange(newCrop, i)}
-                selectionAddon={(props, state) => this.renderSelectionAddon(props, state, i)}
+                onChange={crop => this.handleChange(crop, i)}
+                selectionAddon={crop => this.renderSelectionAddon(crop, i)}
                 {...rest}
               />
             )
