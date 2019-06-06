@@ -1,16 +1,13 @@
 import React, { PureComponent } from 'react'
-import Selection, { SelectionProps } from './Selection'
+import Selection, { SelectionProps, SelectionState } from './Selection'
 import { Omit, fitContain, createCrop } from './utils'
 
 export type ResizeObserve = (el: HTMLElement, callback: () => void) => () => void
 
-export type ImageCropProps = Omit<SelectionProps, 'width' | 'height' | 'selectionAddon'> & {
+export type ImageCropProps = Omit<SelectionProps, 'width' | 'height'> & {
   src: string,
   resizeObserve?: ResizeObserve,
   crossOrigin?: 'anonymous' | 'use-credentials' | '',
-  selectionAddon?:
-  | React.ReactElement
-  | ((props: ImageCropProps, state: ImageCropState) => React.ReactElement),
   onImageLoaded?(image: HTMLImageElement): void,
   onImageError?(image: HTMLImageElement): void,
 }
@@ -96,7 +93,6 @@ export default class ImageCrop extends PureComponent<ImageCropProps, ImageCropSt
       onImageLoaded,
       className,
       style,
-      selectionAddon,
       crossOrigin,
       ...rest
     } = this.props
@@ -114,11 +110,6 @@ export default class ImageCrop extends PureComponent<ImageCropProps, ImageCropSt
       destWidth: containerWidth,
       destHeight: containerHeight,
     })
-
-    let addon = selectionAddon
-    if (typeof addon === 'function') {
-      addon = addon(this.props, this.state)
-    }
 
     return (
       <div
@@ -142,7 +133,6 @@ export default class ImageCrop extends PureComponent<ImageCropProps, ImageCropSt
                 ...style,
                 ...containStyle,
               }}
-              selectionAddon={addon}
               {...rest}
             />
           ) : null

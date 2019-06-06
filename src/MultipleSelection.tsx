@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react'
-import Selection, { SelectionProps } from './Selection'
+import Selection, { SelectionProps, SelectionState } from './Selection'
 import { Omit, Rect } from './utils'
 
-export type MultipleSelectionProps = Omit<SelectionProps, 'crop' | 'hasMask' | 'onChange'> & {
+export type MultipleSelectionProps = Omit<SelectionProps, 'crop' | 'hasMask' | 'onChange' | 'selectionAddon'> & {
   crops: Rect[],
   maxCount?: number | null,
   onChange(crops: Rect[], crop: Rect): void,
+  selectionAddon?:
+  | React.ReactNode
+  | ((props: SelectionProps, state: SelectionState, index: number) => React.ReactNode),
 }
 
 export interface MultipleSelectionState {
@@ -74,9 +77,26 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
     onChangeFinish && onChangeFinish()
   }
 
+  renderSelectionAddon = (props: SelectionProps, state: SelectionState, index: number) => {
+    const { selectionAddon } = this.props
+    if (typeof selectionAddon === 'function') {
+      return selectionAddon(props, state, index)
+    }
+
+    return selectionAddon || null
+  }
+
   render() {
     const { borning } = this.state
-    const { disabled, maxCount, onChange, crops, className, ...rest } = this.props
+    const {
+      disabled,
+      maxCount,
+      onChange,
+      crops,
+      className,
+      selectionAddon,
+      ...rest
+    } = this.props
 
     return (
       <div className={`re-crop__multiple ${className || ''}`}>
@@ -98,7 +118,7 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
                 disabled={disabled}
                 hasMask={false}
                 onChange={newCrop => this.handleChange(newCrop, i)}
-                selectionAddon={<div className="re-crop__close" onClick={() => this.handleDel(i)}>×</div>}
+                selectionAddon={(props, state) => this.renderSelectionAddon(props, state, i)}
                 {...rest}
               />
             )

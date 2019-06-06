@@ -67,12 +67,14 @@ export interface SelectionProps {
   disabled: boolean,
   locked: boolean,
   margin: number,
-  selectionAddon?: React.ReactElement,
+  selectionAddon?:
+  | React.ReactNode
+  | ((props: SelectionProps, state: SelectionState) => React.ReactNode),
   onChange(crop: Rect): void,
   onChangeFinish?(): void,
 }
 
-interface SelectionState {
+export interface SelectionState {
   dragging: DragOrd | null,
 }
 
