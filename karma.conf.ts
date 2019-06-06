@@ -1,6 +1,6 @@
 import { Config } from 'karma'
 import path from 'path'
-import { Configuration } from 'webpack'
+import webpackConfig from './webpack.config'
 
 module.exports = (config: Config) => {
   config.set({
@@ -15,11 +15,6 @@ module.exports = (config: Config) => {
     // list of files / patterns to load in the browser
     files: [
       'test/**/*.spec.ts*',
-      // 'src/**/*.ts',
-      // 'src/**/*.tsx',
-      // 'test/**/*.ts',
-      // 'test/**/*.tsx',
-      // 'test/**/*.png',
     ],
 
     // list of files / patterns to exclude
@@ -33,8 +28,6 @@ module.exports = (config: Config) => {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      // '**/*.ts': ['karma-typescript'],
-      // '**/*.tsx': ['karma-typescript'],
       // add webpack as preprocessor
       'test/**/*.spec.ts*': [ 'webpack' ],
     },
@@ -76,58 +69,18 @@ module.exports = (config: Config) => {
     browserNoActivityTimeout: 30 * 1000,
   })
 
-  const webpackConfig: Configuration = {
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                compilerOptions: {
-                  module: 'es2015',
-                },
-              },
-            },
-          ],
-        },
-        {
-          test: /\.tsx?$/,
-          exclude: [ path.resolve(__dirname, 'test') ],
-          enforce: 'post',
-          use: {
-            loader: 'istanbul-instrumenter-loader',
-            options: { esModules: true },
-          }
-        },
-        {
-          test: /\.less$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            'less-loader',
-          ],
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.js', '.ts', '.json', '.tsx'],
-    },
-  }
-
   config.set({
     webpack: webpackConfig,
     webpackMiddleware: {
-      stats: 'errors-only'
+      stats: 'errors-only',
     },
     coverageIstanbulReporter: {
       reports: [ 'html', 'text-summary' ],
       dir: path.join(__dirname, 'coverage'),
       fixWebpackSourcePaths: true,
-      ['report-config']: {
-        html: { outdir: 'html' }
-      }
+      'report-config': {
+        html: { outdir: 'html' },
+      },
     },
   } as any)
 }

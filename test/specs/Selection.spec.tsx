@@ -57,7 +57,7 @@ describe('<Selection />', function() {
     )
     const maskEl = div.querySelector('.re-crop__mask') as HTMLElement
     deepStrictEqual(
-      [...maskEl.children].map(x => x.getAttribute('style')),
+      Array.from(maskEl.children).map(x => x.getAttribute('style')),
       ['bottom: 75%;', 'top: 75%;', 'right: 75%;', 'left: 75%;'],
     )
   })

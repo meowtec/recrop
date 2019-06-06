@@ -2,10 +2,10 @@ import React from 'react'
 import { render } from 'react-dom'
 import ImageCropApp from './components/ImageCrop'
 import VideoCropApp from './components/VideoCrop'
-import '../src/index.less'
-import './index.less'
 import Responsive from './components/Responsive'
 import MultipleSelectionApp from './components/MultipleSelection'
+import '../src/index.less'
+import './index.less'
 
 function App() {
   return (

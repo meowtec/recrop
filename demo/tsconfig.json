@@ -2,14 +2,13 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "rootDir": "..",
-    "jsx": "react",
-    "declaration": false,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "declaration": false,
   },
   "include": [
     "../typings",
     "../src",
-    "./",
+    "./"
   ]
 }

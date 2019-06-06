@@ -2,9 +2,13 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "rootDir": "..",
+    "allowJs": true,
+    "checkJs": true,
+    "declaration": false,
   },
   "include": [
+    "../typings",
     "../src",
-    "../test"
+    ".",
   ]
 }
