@@ -12,13 +12,25 @@ function App() {
     <div>
       <h2 className="title">ReCrop</h2>
       <div className="container">
-        <h3 className="section-title">Basic</h3>
+        <h3 className="section-title">
+          <div>Basic</div>
+          <div><a target="_blank" href="https://github.com/meowtec/recrop/blob/master/demo/components/ImageCrop.js">source code</a></div>
+        </h3>
         <ImageCropApp />
-        <h3 className="section-title">Crop video</h3>
+        <h3 className="section-title">
+          <div>Crop video</div>
+          <div><a target="_blank" href="https://github.com/meowtec/recrop/blob/master/demo/components/VideoCrop.js">source code</a></div>
+        </h3>
         <VideoCropApp />
-        <h3 className="section-title">Responsive (observed using <code>window.resize</code>) + selectionAddon</h3>
+        <h3 className="section-title">
+          <div>Responsive + selectionAddon + fixed ratio</div>
+          <div><a target="_blank" href="https://github.com/meowtec/recrop/blob/master/demo/components/Responsive.js">source code</a></div>
+        </h3>
         <Responsive />
-        <h3 className="section-title">Multiple selection</h3>
+        <h3 className="section-title">
+          <div>Multiple selection</div>
+          <div><a target="_blank" href="https://github.com/meowtec/recrop/blob/master/demo/components/MultipleSelection.js">source code</a></div>
+        </h3>
         <MultipleSelectionApp />
       </div>
     </div>

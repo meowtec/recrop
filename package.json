@@ -11,7 +11,7 @@
     "lib"
   ],
   "scripts": {
-    "start": "parcel -d docs demo/index.html",
+    "start": "parcel -d docs-dev demo/index.html",
     "lint": "eslint --ext .js,.ts,.tsx src demo test",
     "build": "rimraf lib docs && tsc && parcel build --public-url '.' -d docs demo/index.html",
     "prepare": "npm run build",

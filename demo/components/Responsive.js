@@ -15,8 +15,8 @@ export default class Responsive extends PureComponent {
   }
 
   /**
-   * in most of cases we can use resize event
-   * to observe the cropper container resizing
+   * in most of cases we can use resize event to observe the cropper container resizing
+   * if no help, see `resizeObserve2`
    * @param {HTMLElement} el
    * @param {() => void} callback
    */
@@ -28,11 +28,23 @@ export default class Responsive extends PureComponent {
   }
 
   /**
-   * @param {SelectionProps} props
-   * @param {{cropping: boolean}} state
+   * the ultimate solution but with poor browser compatibility.
+   * may have a look at https://github.com/que-etc/resize-observer-polyfill
+   * @param {HTMLElement} el
+   * @param {() => void} callback
    */
-  renderSelectionAddon = (props, state) => {
-    return props.crop && (
+  resizeObserve2 = (el, callback) => {
+    // @ts-ignore
+    const resizeObserver = new ResizeObserver(callback)
+    resizeObserver.observe(el)
+    return () => resizeObserver.disconnect()
+  }
+
+  /**
+   * @param {Rect} crop
+   */
+  renderSelectionAddon = crop => {
+    return (
       <div style={{
         position: 'absolute',
         top: '50%',
@@ -40,7 +52,7 @@ export default class Responsive extends PureComponent {
         transform: `translate(-50%, -50%)`,
         fontSize: 12,
       }}>
-        {Math.round(props.crop.width)} x {Math.round(props.crop.height)}
+        {Math.round(crop.width)} x {Math.round(crop.height)}
       </div>
     )
   }
@@ -52,6 +64,8 @@ export default class Responsive extends PureComponent {
         <ImageCrop
           crop={this.state.crop}
           src={imageUrl}
+          ratio={2}
+          minWidth={300}
           onChange={this.handleCropChange}
           resizeObserve={this.resizeObserve}
           selectionAddon={this.renderSelectionAddon}
