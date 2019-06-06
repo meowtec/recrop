@@ -1,15 +1,15 @@
 # recrop
 a customizable image-crop / region-selection component for React.
 
-## demo
+## Demo
 https://meowtec.github.io/recrop/
 
 ## Usage
-```
+```sh
 npm i recrop --save
 ```
 
-```
+```javascript
 import { ImageCrop } from 'recrop'
 
 class ImageCropApp extends PureComponent {
@@ -26,7 +26,7 @@ class ImageCropApp extends PureComponent {
       <div style={{ height: 400, width: 600 }}>
         <ImageCrop
           crop={this.state.crop}
-          src=""
+          src="your_image_url"
           onChange={this.handleCropChange}
         />
       </div>
@@ -34,5 +34,9 @@ class ImageCropApp extends PureComponent {
   }
 }
 ```
+
+## Feature
+- Customizable
+- Write in TypeScript
 
 For more usages see [demo](https://meowtec.github.io/recrop/)
