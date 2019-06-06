@@ -113,7 +113,7 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
             return (
               <Selection
                 key={i}
-                className="re-crop--no-pointer"
+                className="re-crop--no-event"
                 crop={crop}
                 disabled={disabled}
                 hasMask={false}
