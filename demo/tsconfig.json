@@ -5,8 +5,10 @@
     "jsx": "react",
     "declaration": false,
     "allowJs": true,
+    "checkJs": true
   },
   "include": [
+    "../typings",
     "../src",
     "./",
   ]

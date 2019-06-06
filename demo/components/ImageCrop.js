@@ -13,14 +13,12 @@ export default class ImageCropApp extends PureComponent {
 
   render() {
     return (
-      <div>
-        <div style={{ height: 405 }}>
-          <ImageCrop
-            crop={this.state.crop}
-            src={imageUrl}
-            onChange={this.handleCropChange}
-          />
-        </div>
+      <div style={{ height: 405 }}>
+        <ImageCrop
+          crop={this.state.crop}
+          src={imageUrl}
+          onChange={this.handleCropChange}
+        />
       </div>
     )
   }

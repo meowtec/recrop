@@ -1,5 +1,13 @@
 import React, { CSSProperties, Component } from 'react'
-import { addMouseMove, includes, clamp, sign, pct, classnames, Rect } from './utils'
+import {
+  addMouseMove,
+  includes,
+  clamp,
+  sign,
+  pct,
+  classnames,
+  Rect,
+} from './utils'
 
 const { abs, min, max } = Math
 
@@ -29,6 +37,8 @@ const getCursor = (ord: DragOrd) => {
     case 'ne':
     case 'sw':
       return 'nesw'
+    default:
+      return ''
   }
 }
 

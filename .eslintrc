@@ -5,12 +5,30 @@
       "jsx": true
     }
   },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "describe": true,
+    "it": true
+  },
   "plugins": [
-    "react",
     "@typescript-eslint"
   ],
-  "extends": ["plugin:@typescript-eslint/recommended"],
+  "extends": ["standard", "plugin:@typescript-eslint/recommended"],
   "rules": {
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "always-multiline"
+    }],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
@@ -18,10 +36,10 @@
         "requireLast": true
       }
     }],
-    "@typescript-eslint/explicit-function-return-type": ["off"],
-    "@typescript-eslint/explicit-member-accessibility": ["off"],
-    "@typescript-eslint/no-non-null-assertion": ["off"],
-    "@typescript-eslint/no-explicit-any": ["off"],
-    "@typescript-eslint/no-unused-vars": ["off"]
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   }
 }

@@ -89,7 +89,7 @@ export default class MultipleSelection extends PureComponent<MultipleSelectionPr
           {...rest}
         />
         {
-          crops.slice(0, crops.length - (borning ?  1 : 0)).map((crop, i) => {
+          crops.slice(0, crops.length - (borning ? 1 : 0)).map((crop, i) => {
             return (
               <Selection
                 key={i}

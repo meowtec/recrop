@@ -1,4 +1,4 @@
-import { deepStrictEqual, equal } from 'assert'
+import { deepStrictEqual, strictEqual } from 'assert'
 import { fitContain, classnames, createCrop } from '../../src/utils'
 
 describe('utils specs', () => {
@@ -57,7 +57,7 @@ describe('utils specs', () => {
   })
 
   it('classnames', () => {
-    equal(classnames({
+    strictEqual(classnames({
       a: true,
       b: false,
       c: true,

@@ -1,4 +1,4 @@
-import { equal, deepStrictEqual, ok } from 'assert'
+import { strictEqual, deepStrictEqual, ok } from 'assert'
 import { pick } from 'lodash'
 import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
@@ -85,7 +85,7 @@ describe('<Selection />', function() {
       div,
     )
 
-    equal(div.querySelector('.re-crop__mask'), null)
+    strictEqual(div.querySelector('.re-crop__mask'), null)
   })
 
   it('transparent / className / renderAddon props', () => {
@@ -113,10 +113,10 @@ describe('<Selection />', function() {
       div,
     )
 
-    equal(div.querySelector('.re-crop__mask'), null)
-    equal(div.querySelector('.re-crop__blank'), null)
-    equal(true, !!div.querySelector('.re-crop.my-test-classname'))
-    equal(true, !!div.querySelector('.re-crop__selection > .test-addon'))
+    strictEqual(div.querySelector('.re-crop__mask'), null)
+    strictEqual(div.querySelector('.re-crop__blank'), null)
+    strictEqual(true, !!div.querySelector('.re-crop.my-test-classname'))
+    strictEqual(true, !!div.querySelector('.re-crop__selection > .test-addon'))
   })
 
   it('create new crop', async () => {
@@ -173,7 +173,7 @@ describe('<Selection />', function() {
     const blankEl = div.querySelector('.re-crop__blank') as HTMLElement
 
     // move x + 40, y + 40
-    await dispatchMove(blankEl, [200, 200 ], [220, 220])
+    await dispatchMove(blankEl, [200, 200], [220, 220])
     deepStrictEqual(app.state.crop, {
       x: 140,
       y: 140,
@@ -182,7 +182,7 @@ describe('<Selection />', function() {
     })
 
     // move x + 2000, y + 2000
-    await dispatchMove(blankEl, [200, 200 ], [1200, 1200])
+    await dispatchMove(blankEl, [200, 200], [1200, 1200])
     deepStrictEqual(app.state.crop, {
       x: 190,
       y: 190,
@@ -191,7 +191,7 @@ describe('<Selection />', function() {
     })
 
     // move x - 2000, y - 2000
-    await dispatchMove(blankEl, [200, 200 ], [-800, -800])
+    await dispatchMove(blankEl, [200, 200], [-800, -800])
     deepStrictEqual(app.state.crop, {
       x: 10,
       y: 10,
@@ -472,7 +472,7 @@ describe('<Selection />', function() {
       [50, 50],
     )
 
-    equal(app.state.crop!.width, app.state.crop!.height * 2)
+    strictEqual(app.state.crop!.width, app.state.crop!.height * 2)
   })
 
   it('handleCropChangeFinish', async () => {
@@ -487,7 +487,7 @@ describe('<Selection />', function() {
       [50, 50],
     )
 
-    equal(app.changeTimes, 1)
+    strictEqual(app.changeTimes, 1)
 
     await dispatchMove(
       div.querySelector('.re-crop__drag-handle[data-ord="nw"]')!,
@@ -495,6 +495,6 @@ describe('<Selection />', function() {
       [50, 50],
     )
 
-    equal(app.changeTimes, 2)
+    strictEqual(app.changeTimes, 2)
   })
 })
