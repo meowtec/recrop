@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import ImageCrop from '../../src/ImageCrop'
+import { ImageCrop, Rect } from '../../src/'
 import imageUrl from '../images/sergio-souza-1386770-unsplash.jpg'
 
 export default class ImageCropApp extends PureComponent {
@@ -7,6 +7,9 @@ export default class ImageCropApp extends PureComponent {
     crop: null,
   }
 
+  /**
+   * @param {Rect} crop
+   */
   handleCropChange = crop => {
     this.setState({ crop })
   }
