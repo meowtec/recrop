@@ -1,6 +1,6 @@
 {
   "name": "recrop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a customizable image-crop / region-selection component for React",
   "keywords": [
     "react",
@@ -9,12 +9,13 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "lint": "eslint --ext .js,.ts,.tsx src demo test",
-    "build": "rimraf lib docs && tsc -m es2015 && lessc src/index.less lib/index.css",
+    "build": "rimraf lib && tsc -m es2015 && lessc src/index.less lib/index.css",
     "build:demo": "rimraf docs && webpack --mode=production",
     "prepare": "npm run build",
     "test": "cross-env NODE_ENV=test karma start",
