@@ -4,6 +4,6 @@ npm-debug.log*
 node_modules
 docs-dev
 lib
-dist
+./dist
 coverage
 package-lock.json
