@@ -34,7 +34,7 @@ export const fitContain = ({
   destHeight: number,
 }) => {
   const ratio = srcWidth / srcHeight
-  let width = clamp(srcWidth, 0, destWidth)
+  let width = destWidth
   const height = clamp(width / ratio, 0, destHeight) || 0
   width = height * ratio || 0
 

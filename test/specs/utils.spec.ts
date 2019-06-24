@@ -18,8 +18,20 @@ describe('utils specs', () => {
 
   it('fitContain: image is wider', () => {
     deepStrictEqual(fitContain({
-      srcWidth: 200,
-      srcHeight: 100,
+      srcWidth: 20,
+      srcHeight: 10,
+      destWidth: 100,
+      destHeight: 100,
+    }), {
+      left: 0,
+      top: 25,
+      width: 100,
+      height: 50,
+    })
+
+    deepStrictEqual(fitContain({
+      srcWidth: 2000,
+      srcHeight: 1000,
       destWidth: 100,
       destHeight: 100,
     }), {
@@ -34,6 +46,18 @@ describe('utils specs', () => {
     deepStrictEqual(fitContain({
       srcWidth: 1000,
       srcHeight: 2000,
+      destWidth: 100,
+      destHeight: 100,
+    }), {
+      left: 25,
+      top: 0,
+      width: 50,
+      height: 100,
+    })
+
+    deepStrictEqual(fitContain({
+      srcWidth: 10,
+      srcHeight: 20,
       destWidth: 100,
       destHeight: 100,
     }), {
